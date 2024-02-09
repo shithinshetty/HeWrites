@@ -1,10 +1,12 @@
 import React from "react";
-import { Button, Navbar, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Button, TextInput } from "flowbite-react";
+import { Link, useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa6";
+import { Navbar } from "flowbite-react";
 
 const Header = () => {
+  const path = useLocation().pathname;
   return (
     <Navbar className="border-b-4 mb-6 mt-2">
       <Link
@@ -34,11 +36,27 @@ const Header = () => {
           <FaMoon />
         </Button>{" "}
         <Link to="/sign-in">
-          <Button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ...">
+          <Button
+            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ... font-semibold"
+            outline
+          >
             Sign In
           </Button>
         </Link>
+        <Navbar.Toggle />
       </div>{" "}
+      <Navbar.Collapse>
+        <Navbar.Link href="/" active={path === "/"} as={"div"}>
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="/about" active={path === "/about"} as={"div"}>
+          About
+        </Navbar.Link>
+
+        <Navbar.Link href="/contact" active={path === "/contact"} as={"div"}>
+          Contact
+        </Navbar.Link>
+      </Navbar.Collapse>
     </Navbar>
   );
 };
