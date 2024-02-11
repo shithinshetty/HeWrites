@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
+import authRoutes from "./routes/auth.route.js";
 const uri = process.env.MONGODB_URL;
 mongoose
   .connect(uri)
@@ -13,7 +14,11 @@ const app = express();
 app.get("/", (req, res) => {
   res.send("Heyy Gurl");
 });
-console.log(process.env.MONGODB_URL);
+
+app.use(express.json());
+//Signup
+app.use("/api/auth", authRoutes);
+
 console.log("Hey");
 
 app.listen(3000, () => {
