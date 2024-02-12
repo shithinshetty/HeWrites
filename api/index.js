@@ -21,6 +21,16 @@ app.use("/api/auth", authRoutes);
 
 console.log("Hey");
 
+app.use((err, req, res, next) => {
+  const statuscode = err.statuscode || 500;
+  const message = err.message || "internal Server Error";
+  res.status(statuscode).json({
+    success: false,
+    statuscode,
+    message,
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server is sucessfully Running on port 3000");
 });

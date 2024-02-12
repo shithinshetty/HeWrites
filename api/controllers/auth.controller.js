@@ -1,7 +1,9 @@
 import User from "../modals/user.modal.js";
-
-export const signup = async (req, res) => {
+import bcrypt from "bcryptjs";
+import { errorHandler } from "../utils/err.js";
+export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
+
   if (
     !username ||
     !email ||
@@ -10,19 +12,19 @@ export const signup = async (req, res) => {
     email === "" ||
     password === ""
   ) {
-    return (
-      res.status(400), json({ message: "All The Fields Are Required My man" })
-    );
+    next(errorHandler(400, "All fields are required"));
   }
+
+  const hashedPassword = bcrypt.hashSync(password, 10);
   const newuser = new User({
     username,
     email,
-    password,
+    password: hashedPassword,
   });
   try {
     await newuser.save();
-    res.send("Signup is success");
+    res.send({ message: "Signup is success" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };

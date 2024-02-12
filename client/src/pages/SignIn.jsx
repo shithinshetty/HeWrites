@@ -1,59 +1,99 @@
 import React from "react";
-
+import { FaGoogle } from "react-icons/fa";
 const SignIn = () => {
   return (
     <>
-      <div className="min-h-screen bg-gray-300 flex flex-col justify-center items-center py-6 rounded-3xl">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">Login To Read</h1>
-              </div>
-              <div className="divide-y divide-gray-200">
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="email"
-                      name="email"
-                      type="text"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                      placeholder="Email address"
-                    />
-                    <label
-                      htmlFor="email"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Email Address
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="password"
-                      name="password"
-                      type="password"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                      placeholder="Password"
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Password
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <button className="bg-blue-500 text-white rounded-md px-2 py-1">
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </div>
+      <div class="flex h-screen w-screen items-center overflow-hidden px-2 ">
+        <div class="relative flex w-96 flex-col space-y-5 rounded-lg border bg-slate-200 px-5 py-10 shadow-xl sm:mx-auto">
+          <span class="font-bold mx-1">
+            <span class="inline-block h-3 w-3 bg-blue-600 "></span>
+            HeWrites
+          </span>
+          <div class="-z-10 absolute top-4 left-1/2 h-full w-5/6 -translate-x-1/2 rounded-lg bg-blue-600 sm:-right-10 sm:top-auto sm:left-auto sm:w-full sm:translate-x-0"></div>
+
+          <div class="mx-auto mb-2 space-y-3">
+            <h1 class="text-center text-3xl font-bold text-gray-700">
+              Sign in
+            </h1>
+            <p class="text-gray-500">Sign in to access your account</p>
+          </div>
+
+          <div>
+            <div class="relative mt-2 w-full">
+              <input
+                type="text"
+                id="username"
+                class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pt-4 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                placeholder=" "
+              />
+              <label
+                for="email"
+                class="origin-[0] peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 absolute left-1 top-2 z-10 -translate-y-4 scale-75 transform cursor-text select-none bg-slate-300 px-2 text-sm text-gray-500 duration-300"
+              >
+                {" "}
+                Enter Your Username{" "}
+              </label>
             </div>
           </div>
+          <div>
+            <div class="relative mt-2 w-full">
+              <input
+                type="email"
+                id="email"
+                class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pt-4 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                placeholder=" "
+              />
+              <label
+                for="email"
+                class="origin-[0] peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 absolute left-1 top-2 z-10 -translate-y-4 scale-75 transform cursor-text select-none bg-slate-300 px-2 text-sm text-gray-500 duration-300"
+              >
+                {" "}
+                Enter Your Email{" "}
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <div class="relative mt-2 w-full">
+              <input
+                type="password"
+                id="password"
+                class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pt-4 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                placeholder=" "
+              />
+              <label
+                for="password"
+                class="origin-[0] peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 absolute left-1 top-2 z-10 -translate-y-4 scale-75 transform cursor-text select-none bg-slate-300 px-2 text-sm text-gray-500 duration-300"
+              >
+                {" "}
+                Enter Your Password
+              </label>
+            </div>
+          </div>
+          <div class="flex w-full items-center">
+            <button class="shrink-0 inline-block w-36  rounded-lg bg-blue-600 py-3 font-bold text-white">
+              Login
+            </button>
+            <button class="  flex gap-3 mx-2  rounded-lg bg-blue-600 py-3 font-bold text-white">
+              <FaGoogle class="size-9 my-1 mx-3 " />
+              Sign In With Google
+            </button>
+            {/* <a
+              class="w-full text-center text-sm font-medium text-gray-600 hover:underline"
+              href="#"
+            >
+              Forgot your password?
+            </a> */}
+          </div>
+          <p class="text-center text-gray-600">
+            Don't have an account?
+            <a
+              href="/signup"
+              class="whitespace-nowrap font-semibold text-gray-900 hover:underline"
+            >
+              Sign up
+            </a>
+          </p>
         </div>
       </div>
     </>

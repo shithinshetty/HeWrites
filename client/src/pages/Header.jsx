@@ -8,7 +8,7 @@ import { Navbar } from "flowbite-react";
 const Header = () => {
   const path = useLocation().pathname;
   return (
-    <Navbar className="border-b-4 mb-6 mt-2">
+    <Navbar className="border-b-4 mb-6 mt-2 bg-slate-200">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-slate-300"
@@ -35,7 +35,7 @@ const Header = () => {
         >
           <FaMoon />
         </Button>{" "}
-        <Link to="/sign-in">
+        <Link to="/signin">
           <Button
             className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ... font-semibold"
             outline
