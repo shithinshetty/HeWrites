@@ -56,7 +56,8 @@ const SignIn = () => {
           <div>
             <div class="relative mt-2 w-full">
               <input
-                type="password"
+                type="text
+                "
                 id="password"
                 class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pt-4 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
                 placeholder=" "

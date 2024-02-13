@@ -4,16 +4,15 @@ import { Link, useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa6";
 import { Navbar } from "flowbite-react";
-
 const Header = () => {
   const path = useLocation().pathname;
   return (
-    <Navbar className="border-b-4 mb-6 mt-2 bg-slate-200">
+    <Navbar className="border-b-4 mb-6  bg-slate-200 ">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-slate-300"
       >
-        <div className=" px-3 py-3 bg-gradient-to-br from-green-400 to-purple-700 rounded-3xl text-slate-200">
+        <div className=" flex px-3 py-3 bg-blue-600 rounded-3xl text-slate-200">
           HeWrites
         </div>
       </Link>

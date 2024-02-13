@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Header from "./pages/Header";
 import Signup from "./pages/Signup";
+import Footer from "./pages/Footer";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,12 +14,14 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Header />} />
+          {/* <Route path="/" element={<Header />} /> */}
           <Route path="/signup" element={<Signup />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
