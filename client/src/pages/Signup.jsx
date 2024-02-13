@@ -28,9 +28,12 @@ const Signup = () => {
       });
       const data = await res.json();
       if (data.success === false) {
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
         return setErrmsg(data.message);
       }
-      setLoading(false);
+
       if (res.ok) {
         navigate("/signin");
       }
@@ -112,7 +115,7 @@ const Signup = () => {
           </button>
           <button class="  flex mb-6 rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700">
             <FaGoogle className="size-5 my-1 mx-3 " />
-            Sign In With Goggle
+            Sign Up With Goggle
           </button>
         </form>
         <p class="">
