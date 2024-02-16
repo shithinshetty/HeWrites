@@ -1,25 +1,31 @@
 import { Alert, Spinner } from "flowbite-react";
-
+import {
+  signInFailure,
+  signInStart,
+  signInSucess,
+} from "../redux/user/userSlice";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FaGoogle } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 const SignIn = () => {
   const [formData, setformData] = useState({});
-  const [errmsg, setErrmsg] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [errmsg, setErrmsg] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const { loading, error: errmsg } = useSelector((state) => state.user);
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrmsg("Enter All The Fields Brother");
+      return dispatch(signInFailure("Please fill all the fields"));
     }
     try {
-      setLoading(true);
-      setErrmsg(null);
+      dispatch(signInStart());
 
       const res = await fetch("/api/auth/signin", {
         method: "POST",
@@ -30,17 +36,17 @@ const SignIn = () => {
       if (data.success === false) {
         setTimeout(() => {
           //I've Added A Settimeout that executes after 3s if invalid cred
-          setLoading(false);
+          dispatch(signInFailure());
         }, 3000);
-        return setErrmsg(data.message);
+        dispatch(signInFailure(data.message));
       }
 
       if (res.ok) {
+        dispatch(signInSucess(data));
         navigate("/");
       }
     } catch (error) {
-      setErrmsg(error.message);
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 
