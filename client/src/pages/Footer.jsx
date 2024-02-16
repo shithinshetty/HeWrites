@@ -40,8 +40,9 @@ const Footer = () => {
             © {new Date().getFullYear()}{" "}
             <a href="https://flowbite.com/" class="hover:underline">
               HeWrites™
+              <br />
             </a>
-            . All Rights Reserved.
+            Made With ❤️ in Kudla. <br /> All Rights Reserved.
           </span>
         </div>
       </footer>

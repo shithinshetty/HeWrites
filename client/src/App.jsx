@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Header from "./pages/Header";
 import Signup from "./pages/Signup";
 import Footer from "./pages/Footer";
+import Home from "./pages/Home";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
-          {/* <Route path="/" element={<Header />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <Footer />
