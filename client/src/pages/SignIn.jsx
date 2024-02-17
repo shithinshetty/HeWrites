@@ -4,11 +4,13 @@ import {
   signInStart,
   signInSucess,
 } from "../redux/user/userSlice";
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaGoogle } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import Oauth from "./oauth";
 const SignIn = () => {
   const [formData, setformData] = useState({});
   // const [errmsg, setErrmsg] = useState(null);
@@ -107,7 +109,7 @@ const SignIn = () => {
 
             <div class="flex w-full items-center">
               <button
-                class="shrink-0 inline-block w-36   rounded-lg bg-blue-600 py-3 font-bold text-white"
+                class="shrink-0 inline-block w-36   rounded-lg bg-blue-600 py-3 font-bold text-white mt-4 mb-2"
                 type="submit"
                 disabled={loading}
               >
@@ -126,10 +128,10 @@ const SignIn = () => {
                   "Login"
                 )}
               </button>
-              <button class=" flex mx-3 my-4   w-36   rounded-lg bg-blue-600 py-3 font-bold text-white">
+              {/* <button class=" flex mx-3 my-4   w-36   rounded-lg bg-blue-600 py-3 font-bold text-white">
                 <FaGoogle class="size-8  my-1 mx-3 " />
                 Sign In With Google
-              </button>
+              </button> */}
 
               {/* <a
               class="w-full text-center text-sm font-medium text-gray-600 hover:underline"
@@ -138,7 +140,9 @@ const SignIn = () => {
               Forgot your password?
             </a> */}
             </div>
+            <Oauth />
           </form>
+
           <p class="text-center text-gray-600">
             Don't have an account?
             <a

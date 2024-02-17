@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import Oauth from "./oauth";
 const Signup = () => {
   const [formData, setformData] = useState({});
   const [errmsg, setErrmsg] = useState(null);
@@ -113,11 +114,9 @@ const Signup = () => {
               "Sign Up"
             )}
           </button>
-          <button class="  flex mb-6 rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700">
-            <FaGoogle className="size-5 my-1 mx-3 " />
-            Sign Up With Goggle
-          </button>
+          <Oauth />
         </form>
+
         <p class="">
           By signing up you are agreeing to Shithin's{" "}
           <a

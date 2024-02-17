@@ -2,6 +2,8 @@ import User from "../modals/user.modal.js";
 import bcrypt from "bcryptjs";
 import { errorHandler } from "../utils/err.js";
 import jwt from "jsonwebtoken";
+
+//Signup
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
@@ -30,6 +32,7 @@ export const signup = async (req, res, next) => {
   }
 };
 
+//SignIN
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password || email === "" || password === "") {
@@ -57,6 +60,42 @@ export const signin = async (req, res, next) => {
         httpOnly: true,
       })
       .json(validUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//GoogleAuth
+export const google = async (req, res, next) => {
+  const { name, email, googlephotoURl } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+      res
+        .status(200)
+        .cookie("access_token_gauth", token, {
+          httpOnly: true,
+        })
+        .json(user);
+    } else {
+      const generatedPasscode = email + process.env.JWT_SECRET;
+      const hashPasscode = bcrypt.hashSync(generatedPasscode, 10);
+      const newUser = new User({
+        username: name.toLowerCase().split(" ").join(" "),
+        email,
+        password: hashPasscode,
+        profilePicture: googlephotoURl,
+      });
+      await newUser.save();
+      const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET);
+      res
+        .status(200)
+        .cookie("access_token_gauth", token, {
+          httpOnly: true,
+        })
+        .json(newUser);
+    }
   } catch (error) {
     next(error);
   }
