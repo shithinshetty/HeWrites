@@ -36,9 +36,9 @@ const SignIn = () => {
       if (data.success === false) {
         setTimeout(() => {
           //I've Added A Settimeout that executes after 3s if invalid cred
-          dispatch(signInFailure());
+          dispatch(signInFailure(data.message));
         }, 3000);
-        dispatch(signInFailure(data.message));
+        // dispatch(signInFailure(data.message));
       }
 
       if (res.ok) {
