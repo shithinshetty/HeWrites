@@ -55,7 +55,7 @@ const SignIn = () => {
   return (
     <>
       <div class="flex h-screen w-screen items-center overflow-hidden px-2 ">
-        <div class="relative flex w-96 flex-col space-y-5 rounded-lg border bg-slate-200 px-5 py-10 shadow-xl sm:mx-auto">
+        <div class="relative flex w-96 flex-col space-y-5 rounded-lg border bg-slate-200 text-black px-5 py-10 shadow-xl sm:mx-auto">
           <span class="font-bold mx-1">
             <span class="inline-block h-3 w-3 bg-blue-600 "></span>
             HeWrites
