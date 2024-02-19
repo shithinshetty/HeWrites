@@ -13,7 +13,7 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname;
   return (
-    <Navbar className="border-b-4 mb-6  bg-slate-200 ">
+    <Navbar className="border-b-4  bg-slate-200 ">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-slate-300"
@@ -46,7 +46,7 @@ const Header = () => {
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+              <Avatar img={currentUser.profilePicture} alt="user" rounded />
             }
           >
             <Dropdown.Header>

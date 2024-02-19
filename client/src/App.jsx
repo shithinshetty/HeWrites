@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Footer from "./pages/Footer";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,7 +19,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route element={<PrivateRoute />}>
+            {" "}
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
