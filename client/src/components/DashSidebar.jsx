@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { HiUserCircle } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
+import { signOutSuccess } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 const DashSidebar = () => {
   const location = useLocation();
@@ -14,6 +16,25 @@ const DashSidebar = () => {
       setTab(tabFromURl);
     }
   }, [location.search]);
+
+  const dispatch = useDispatch();
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log("Sign Out SuccessFull");
+        dispatch(signOutSuccess(data));
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Sidebar className=" w-full md:w-56">
       <Sidebar.Items>
@@ -28,7 +49,12 @@ const DashSidebar = () => {
               Profile
             </Sidebar.Item>
           </Link>
-          <Sidebar.Item icon={FaSignOutAlt} label={"User"} labelColor="yellow">
+          <Sidebar.Item
+            onClick={handleSignOut}
+            icon={FaSignOutAlt}
+            label={"User"}
+            labelColor="yellow"
+          >
             Get Out
           </Sidebar.Item>
         </Sidebar.ItemGroup>

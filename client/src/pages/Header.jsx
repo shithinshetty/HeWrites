@@ -7,11 +7,30 @@ import { Navbar } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { FaSun } from "react-icons/fa";
+import { signOutSuccess } from "../redux/user/userSlice";
 const Header = () => {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname;
+
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log("Sign Out SuccessFull");
+        dispatch(signOutSuccess(data));
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Navbar className="border-b-4  bg-slate-200 ">
       <Link
@@ -59,7 +78,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Get Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut}>Get Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/signin">
