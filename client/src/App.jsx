@@ -9,6 +9,8 @@ import Footer from "./pages/Footer";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminOnlyPrivateRoute from "./components/AdminOnlyPrivateRoute";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +24,9 @@ function App() {
           <Route element={<PrivateRoute />}>
             {" "}
             <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route element={<AdminOnlyPrivateRoute />}>
+            <Route path="/create-post" element={<CreatePost />} />
           </Route>
 
           <Route path="/" element={<Home />} />

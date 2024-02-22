@@ -1,6 +1,7 @@
 import {
   Alert,
   Button,
+  ButtonGroup,
   Modal,
   ModalBody,
   ModalHeader,
@@ -19,6 +20,7 @@ import {
 } from "../redux/user/userSlice.js";
 import { HiOutlineShieldExclamation } from "react-icons/hi";
 import { FaExclamationTriangle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const DashProfile = () => {
   const [showmodal, setShowmodal] = useState(false);
@@ -133,6 +135,17 @@ export const DashProfile = () => {
         <Button type="submit" color="blue" outline>
           Update
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={"/create-post"}>
+            <Button
+              type="button"
+              color="blue"
+              className="dark:bg-blue-900 w-full"
+            >
+              Create A Post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="text-red-600 flex justify-between mt-5 ">
         <span onClick={() => setShowmodal(true)} className="cursor-pointer">

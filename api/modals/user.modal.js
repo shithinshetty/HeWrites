@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       default:
         "https://gulistannewstv.com/wp-content/uploads/2024/02/PM-Modi-4.jpg",
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
