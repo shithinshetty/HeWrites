@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import postRoutes from "./routes/post.route.js";
 const uri = process.env.MONGODB_URL;
 mongoose
   .connect(uri)
@@ -26,6 +27,8 @@ console.log("Hey");
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
+
+app.use("/api/post", postRoutes);
 
 app.use((err, req, res, next) => {
   const statuscode = err.statuscode || 500;
