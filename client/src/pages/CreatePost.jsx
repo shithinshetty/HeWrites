@@ -11,6 +11,7 @@ import {
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
 const CreatePost = () => {
+  const [postStatus, setPostStatus] = useState(null);
   const [publisherror, setPublishError] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -65,20 +66,23 @@ const CreatePost = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        console.log("Post Creation Successful");
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        setPostStatus("Post Creation Successful");
+        setTimeout(() => navigate(`/post/${data.slug}`), 9000);
       } else {
         setPublishError(data.message);
+
         return;
       }
     } catch (error) {
       setPublishError("Something Went Wrong");
+      setPostStatus(null);
     }
   };
   {
     setTimeout(() => {
       setPublishError(null);
+      setPostStatus(null);
     }, 9000);
   }
   return (
@@ -151,6 +155,11 @@ const CreatePost = () => {
           {publisherror && (
             <Alert className="mt-5" color="failure">
               {publisherror}{" "}
+            </Alert>
+          )}
+          {postStatus && (
+            <Alert className="mt-5" color="success">
+              {postStatus}{" "}
             </Alert>
           )}
         </form>
