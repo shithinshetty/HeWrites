@@ -1,13 +1,14 @@
 import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
-import { HiUserCircle } from "react-icons/hi";
+import { HiOutlineDocumentText, HiUserCircle } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { signOutSuccess } from "../redux/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const DashSidebar = () => {
   const location = useLocation();
+  const { currentUser } = useSelector((state) => state.user);
   const [tab, setTab] = useState("");
   useEffect(() => {
     const urlparams = new URLSearchParams(location.search);
@@ -16,7 +17,7 @@ const DashSidebar = () => {
       setTab(tabFromURl);
     }
   }, [location.search]);
-
+  console.log(currentUser.isAdmin);
   const dispatch = useDispatch();
   const handleSignOut = async () => {
     try {
@@ -38,21 +39,33 @@ const DashSidebar = () => {
   return (
     <Sidebar className=" w-full md:w-56">
       <Sidebar.Items>
-        <Sidebar.ItemGroup>
+        <Sidebar.ItemGroup className="flex flex-col">
           <Link to="/dashboard?tab=profile">
             <Sidebar.Item
               active={tab === "profile"}
               icon={HiUserCircle}
-              label={"User"}
+              label={currentUser.isAdmin ? "Admin" : "User"}
               labelColor="yellow"
+              as="div"
             >
               Profile
             </Sidebar.Item>
           </Link>
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=posts">
+              <Sidebar.Item
+                active={tab === "posts"}
+                icon={HiOutlineDocumentText}
+              >
+                Posts
+              </Sidebar.Item>
+            </Link>
+          )}
+
           <Sidebar.Item
             onClick={handleSignOut}
             icon={FaSignOutAlt}
-            label={"User"}
+            label={currentUser.isAdmin ? "Admin" : "User"}
             labelColor="yellow"
           >
             Get Out
