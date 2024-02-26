@@ -39,7 +39,7 @@ const Oauth = () => {
       class="  flex mb-6 rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700"
     >
       <FaGoogle className="size-5 my-1 mx-3 " />
-      Sign Up With Goggle
+      Sign Up With Google
     </button>
   );
 };

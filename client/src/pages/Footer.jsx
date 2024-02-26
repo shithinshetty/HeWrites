@@ -38,7 +38,7 @@ const Footer = () => {
           <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-3" />
           <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400 ">
             © {new Date().getFullYear()}{" "}
-            <a href="https://flowbite.com/" class="hover:underline">
+            <a href="/" class="hover:underline">
               HeWrites™
               <br />
             </a>

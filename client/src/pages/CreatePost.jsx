@@ -44,7 +44,7 @@ const CreatePost = () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, imageUrl: downloadUrl });
+            setFormData({ ...formData, image: downloadUrl });
           });
         }
       );
@@ -135,9 +135,9 @@ const CreatePost = () => {
           {imageUploadError && (
             <Alert color="failure">{imageUploadError}</Alert>
           )}
-          {formData.imageUrl && (
+          {formData.image && (
             <img
-              src={formData.imageUrl}
+              src={formData.image}
               alt="upload"
               className="w-full h-72 object-cover"
             />
