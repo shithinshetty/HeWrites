@@ -50,7 +50,7 @@ export const updateUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   console.log(req.params.userId);
   console.log(req.user.userId);
-  if (req.user.userId !== req.params.userId) {
+  if (!req.user.isAdmin && req.user.userId !== req.params.userId) {
     return next(errorHandler(403, "You are not authorized to Delete "));
   }
   try {
@@ -64,6 +64,36 @@ export const deleteUser = async (req, res, next) => {
 export const singOut = (req, res, next) => {
   try {
     res.clearCookie("access_token").status(200).json("User Signed Out");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUsers = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(403, "You're Not an Admin"));
+  }
+  try {
+    const startindex = parseInt(req.query.startindex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
+    const user = await User.find()
+      .sort({ createdAt: sortDirection })
+      .skip(startindex)
+      .limit(limit);
+
+    const userCount = await User.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+
+    const lastMonthUsers = await User.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+    res.status(200).json({ user, userCount, lastMonthUsers });
   } catch (error) {
     next(error);
   }
