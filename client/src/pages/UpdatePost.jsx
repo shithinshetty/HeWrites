@@ -175,7 +175,7 @@ const UpdatePost = () => {
           <ReactQuill
             theme="snow"
             placeholder="Write....."
-            className="h-72 mb-12 "
+            className="h-96 mb-12 "
             required
             onChange={(value) => setFormData({ ...formData, content: value })}
             value={formData.content}

@@ -145,7 +145,8 @@ const CreatePost = () => {
           <ReactQuill
             theme="snow"
             placeholder="Write....."
-            className="h-72 mb-12 "
+            className="w-full h-96 mb-4 "
+            style={{ overflowY: "hidden" }}
             required
             onChange={(value) => setFormData({ ...formData, content: value })}
           />
