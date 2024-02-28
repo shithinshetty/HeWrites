@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdminOnlyPrivateRoute from "./components/AdminOnlyPrivateRoute";
 import CreatePost from "./pages/CreatePost";
 import UpdatePost from "./pages/UpdatePost";
+import Post from "./pages/Post";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -30,7 +31,7 @@ function App() {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/update-post/:postId" element={<UpdatePost />} />
           </Route>
-
+          <Route path="/post/:postSlug" element={<Post />} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

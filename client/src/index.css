@@ -18,3 +18,33 @@ body {
   background-color: grey;
   font-size: 1.5rem;
 }
+
+.post-content p {
+  margin-bottom: 1.3rem;
+}
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 1.5rem 0;
+}
+.post-content h2 {
+  font-size: 1.4rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 1.5rem 0;
+}
+
+.post-content a {
+  color: red !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+.dark .post-content a {
+  color: rgb(243, 206, 138) !important;
+}
