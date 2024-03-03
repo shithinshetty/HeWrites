@@ -1,16 +1,23 @@
 import { Alert, Button, TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { errorHandler } from "../../../api/utils/err";
+import Comment from "../pages/Comment";
 
 export const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
+  const [commentslist, setCommentsList] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
       return;
+    }
+    if (comment.length === 0) {
+      setError("Enter Something Brother!!!");
     }
     try {
       const res = await fetch("/api/comment/create", {
@@ -28,19 +35,36 @@ export const CommentSection = ({ postId }) => {
       if (res.ok) {
         setComment("");
         setError(null);
+        setCommentsList([data, ...commentslist]);
       }
     } catch (error) {
       setError(error.message);
     }
   };
 
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+
+        if (res.ok) {
+          const data = await res.json();
+          setCommentsList(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getComments();
+  }, [postId]);
+
   return (
-    <div className="max-w-xl  mx-auto w-full p-3 ">
+    <div className="max-w-xl mx-auto w-full p-3 ">
       {currentUser ? (
-        <div className="flex gap-3  items-center my-5 text-gray-500 text-sm">
+        <div className="flex gap-3 items-center my-5 text-gray-500 text-sm">
           <p>Signed In As</p>
           <img
-            className="h-7 w-7 object-cover rounded-full "
+            className="h-7 w-7 object-cover rounded-full"
             src={currentUser.profilePicture}
             alt=""
           />
@@ -76,20 +100,36 @@ export const CommentSection = ({ postId }) => {
             value={comment}
           />
           <div className="flex justify-between items-center mt-5">
-            <p className="text-gray-200 text-xs">
+            <p className="text-slate-700 dark:text- text-xs">
               {200 - comment.length} characters left
             </p>
             <Button className="text-slate-200" color="blue" type="submit">
               Submit
             </Button>
           </div>
+          {error && (
+            <Alert color="failure" className="mt-5">
+              {" "}
+              {error}
+            </Alert>
+          )}
         </form>
       )}
-      {error && (
-        <Alert color="failure" className="mt-5">
-          {" "}
-          {error}
-        </Alert>
+
+      {commentslist.length === 0 ? (
+        <p className="text-sm my-5">No comments Yet</p>
+      ) : (
+        <>
+          <div className="text-sm my-5 flex items-center gap-1">
+            <p>Comments</p>
+            <div className="border border-slate-900 py-1 px-2 rounded-sm">
+              <p>{commentslist.length}</p>
+            </div>
+          </div>
+          {commentslist.map((comment) => (
+            <Comment key={comment._id} comment={comment} />
+          ))}
+        </>
       )}
     </div>
   );
