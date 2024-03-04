@@ -66,25 +66,25 @@ export const CommentSection = ({ postId }) => {
       const res = await fetch(`/api/comment/like/${commentId}`, {
         method: "PUT",
       });
-      c;
       if (res.ok) {
         const data = await res.json();
         setCommentsList(
-          commentslist.map((comment) => {
+          commentslist.map((comment) =>
             comment._id === commentId
               ? {
                   ...comment,
                   likes: data.likes,
                   numberOfLikes: data.likes.length,
                 }
-              : { comment };
-          })
+              : comment
+          )
         );
       }
     } catch (error) {
       console.log(error.message);
     }
   };
+
   return (
     <div className="max-w-xl mx-auto w-full p-3 ">
       {currentUser ? (
