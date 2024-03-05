@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { FaThumbsUp } from "react-icons/fa";
+import { FaExclamationTriangle, FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
-export default function Comment({ comment, onLike, onEdit }) {
+export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const { currentUser } = useSelector((state) => state.user);
   const [editedContent, setEditedContent] = useState(comment.content);
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(null);
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -44,6 +45,7 @@ export default function Comment({ comment, onLike, onEdit }) {
       console.log(error);
     }
   };
+
   return (
     <div className=" flex p-4 border-2 dark:border-gray-600 text-sm rounded-full mb-2">
       <div className="flex-shrink-0 mr-3">
@@ -114,12 +116,20 @@ export default function Comment({ comment, onLike, onEdit }) {
               </p>
               {currentUser &&
                 (currentUser._id === comment.userId || currentUser.isAdmin) && (
-                  <div className="flex  ">
+                  <div className="flex  gap-3">
                     <button
                       onClick={handleUpdate}
                       className="text-lime-500 cursor-pointer"
                     >
                       Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        onDelete(comment._id);
+                      }}
+                      className="text-red-600 cursor-pointer"
+                    >
+                      Delete
                     </button>
                   </div>
                 )}

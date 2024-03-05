@@ -75,3 +75,19 @@ export const editcomment = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deletecomment = async (req, res, next) => {
+  const comment = await Comment.findById(req.params.commentId);
+  if (!comment) {
+    return next(errorHandler(404, "Comment Not Found"));
+  }
+  if (comment.userId !== req.user.userId && !req.user.isAdmin) {
+    return next(errorHandler(403, "You are Not Authorized To Delete"));
+  }
+  try {
+    await Comment.findByIdAndDelete(req.params.commentId);
+    res.status(200).json("Post Deleted");
+  } catch (error) {
+    next(error);
+  }
+};

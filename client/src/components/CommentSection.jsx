@@ -1,16 +1,24 @@
-import { Alert, Button, TextInput } from "flowbite-react";
+import {
+  Alert,
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  TextInput,
+} from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { errorHandler } from "../../../api/utils/err";
 import Comment from "../pages/Comment";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const [commentslist, setCommentsList] = useState([]);
-
+  const [deletecomment, setDeleteComment] = useState(null);
+  const [modal, setModal] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
@@ -92,7 +100,23 @@ export const CommentSection = ({ postId }) => {
       )
     );
   };
+  const handleDelete = async (commentId) => {
+    setModal(false);
+    try {
+      const res = await fetch(`/api/comment/delete/${commentId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        const data = await res.json();
 
+        setCommentsList(
+          commentslist.filter((comment) => comment._id !== commentId)
+        );
+      }
+    } catch (error) {
+      console.log("Cannot Delete Comment");
+    }
+  };
   return (
     <div className="max-w-xl mx-auto w-full p-3 ">
       {currentUser ? (
@@ -167,10 +191,43 @@ export const CommentSection = ({ postId }) => {
               comment={comment}
               onLike={handleLike}
               onEdit={handleEdit}
+              onDelete={(commentId) => {
+                setModal(true);
+                setDeleteComment(commentId);
+              }}
             />
           ))}
         </>
       )}
+      <Modal
+        show={modal}
+        onClose={() => setModal(false)}
+        popup
+        size="md"
+        className="bg-slate-100"
+        color="black"
+      >
+        <ModalHeader />
+        <ModalBody>
+          <div className="text-center ">
+            <FaExclamationTriangle className="h-14 w-14 text-red-600 dark:text-blue-600 mx-auto mb-4" />
+            <h3 className="font-semibold text-3xl mb-5 text-slate-900 dark:text-blue-600">
+              Do you really want to delete??
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                color="failure"
+                onClick={() => handleDelete(deletecomment)}
+              >
+                Yes,I'm Sure
+              </Button>
+              <Button color="success" onClick={() => setModal(false)}>
+                Nope
+              </Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
