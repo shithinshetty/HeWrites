@@ -93,7 +93,7 @@ export const getUsers = async (req, res, next) => {
     const lastMonthUsers = await User.countDocuments({
       createdAt: { $gte: oneMonthAgo },
     });
-    res.status(200).json({ user, userCount, lastMonthUsers });
+    res.status(200).json({ user, userCount, lastMonthUsers, oneMonthAgo });
   } catch (error) {
     next(error);
   }
