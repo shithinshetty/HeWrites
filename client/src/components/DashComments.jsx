@@ -28,10 +28,11 @@ const DashComments = () => {
         if (res.ok) {
           setComment(data.comments);
 
-          if (data.comments.length < 9) {
+          if (data.comment.length < 9) {
             setShowMore(false);
           }
         }
+        console.log(data.comment.length);
       } catch (error) {
         console.log(error);
       }
@@ -46,7 +47,7 @@ const DashComments = () => {
     const startIndex = comment.length;
     try {
       const res = await fetch(
-        `/api/comment/getcomments?startIndex=${startIndex}`
+        `/api/comment/getcomments?startindex=${startIndex}`
       );
       console.log(res);
       const data = await res.json();
