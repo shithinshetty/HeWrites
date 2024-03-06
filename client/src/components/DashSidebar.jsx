@@ -5,7 +5,7 @@ import { HiOutlineDocumentText, HiUserCircle, HiUsers } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { signOutSuccess } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { FcComments } from "react-icons/fc";
 const DashSidebar = () => {
   const location = useLocation();
   const { currentUser } = useSelector((state) => state.user);
@@ -68,7 +68,13 @@ const DashSidebar = () => {
               </Sidebar.Item>
             </Link>
           )}
-
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=comments">
+              <Sidebar.Item active={tab === "comments"} icon={FcComments}>
+                Comments
+              </Sidebar.Item>
+            </Link>
+          )}
           <Sidebar.Item onClick={handleSignOut} icon={FaSignOutAlt}>
             Get Out
           </Sidebar.Item>

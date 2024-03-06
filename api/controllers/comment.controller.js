@@ -91,3 +91,35 @@ export const deletecomment = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getcomments = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(403, "You're Not an Admin"));
+  }
+  try {
+    const startindex = parseInt(req.query.startindex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
+    const comments = await Comment.find()
+      .sort({ createdAt: sortDirection })
+      .skip(startindex)
+      .limit(limit);
+
+    const commentCount = await Comment.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+
+    const lastMonthComment = await Comment.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+    res
+      .status(200)
+      .json({ comments, commentCount, oneMonthAgo, lastMonthComment });
+  } catch (error) {
+    next(error);
+  }
+};
