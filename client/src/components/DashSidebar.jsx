@@ -6,6 +6,8 @@ import { Link, useLocation } from "react-router-dom";
 import { signOutSuccess } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FcComments } from "react-icons/fc";
+import { LuLayoutDashboard } from "react-icons/lu";
+
 const DashSidebar = () => {
   const location = useLocation();
   const { currentUser } = useSelector((state) => state.user);
@@ -51,6 +53,16 @@ const DashSidebar = () => {
               Profile
             </Sidebar.Item>
           </Link>
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=dashboard">
+              <Sidebar.Item
+                active={tab === "dashboard"}
+                icon={LuLayoutDashboard}
+              >
+                Dashboard
+              </Sidebar.Item>
+            </Link>
+          )}
           {currentUser.isAdmin && (
             <Link to="/dashboard?tab=posts">
               <Sidebar.Item
