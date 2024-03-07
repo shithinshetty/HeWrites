@@ -93,15 +93,15 @@ const Header = () => {
         <Navbar.Toggle />
       </div>{" "}
       <Navbar.Collapse>
-        <Navbar.Link href="/" active={path === "/"} as={"div"}>
-          Home
+        <Navbar.Link active={path === "/"} as={"div"}>
+          <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link href="/about" active={path === "/about"} as={"div"}>
-          About
+        <Navbar.Link active={path === "/about"} as={"div"}>
+          <Link to="/about">About</Link>
         </Navbar.Link>
 
-        <Navbar.Link href="/contact" active={path === "/contact"} as={"div"}>
-          Contact
+        <Navbar.Link active={path === "/contact"} as={"div"}>
+          <Link to="/contact">Contact</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

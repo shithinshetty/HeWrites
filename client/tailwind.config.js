@@ -9,6 +9,7 @@ export default {
     extend: {
       backgroundImage: {
         "hero-pattern": "url('components/wallpaper.jpg')",
+        "home-wallpaper": "url('components/wallpaper2.jpg')",
       },
     },
   },
