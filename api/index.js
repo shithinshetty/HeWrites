@@ -21,17 +21,13 @@ mongoose
   })
   .catch((err) => console.log(err));
 const app = express();
-app.get("/", (req, res) => {
-  res.send("Heyy Gurl");
-});
 
 app.use(express.json());
+app.use(cookieParser());
 //Signup
 app.use("/api/auth", authRoutes);
 
 console.log("Hey");
-
-app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
 
