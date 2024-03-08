@@ -13,6 +13,7 @@ import path from "path";
 const __dirname = path.resolve();
 
 const uri = process.env.MONGODB_URL;
+
 mongoose
   .connect(uri)
   .then(() => {
@@ -30,11 +31,6 @@ app.use("/api/auth", authRoutes);
 
 console.log("Hey");
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
@@ -42,6 +38,11 @@ app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 app.use((err, req, res, next) => {
   const statuscode = err.statuscode || 500;
   const message = err.message || "internal Server Error";
