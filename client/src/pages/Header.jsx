@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa6";
 import { Navbar } from "flowbite-react";
@@ -8,11 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { FaSun } from "react-icons/fa";
 import { signOutSuccess } from "../redux/user/userSlice";
+
 const Header = () => {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname;
+  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   const handleSignOut = async () => {
     try {
@@ -30,6 +41,13 @@ const Header = () => {
       console.log(error.message);
     }
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
 
   return (
     <Navbar className="border-b-4  bg-slate-200 ">
@@ -41,12 +59,14 @@ const Header = () => {
           HeWrites
         </div>
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         {" "}
         <TextInput
           type="text"
           placeholder="🔍 Search..."
           className="hidden lg:inline "
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />{" "}
       </form>
       <Button className="w-20 h-10 bg-purple-400 lg:hidden" color="black">
