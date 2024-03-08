@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
-import Oauth from "./oauth";
+import Oauth from "./Oauth";
 const Signup = () => {
   const [formData, setformData] = useState({});
   const [errmsg, setErrmsg] = useState(null);
