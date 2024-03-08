@@ -19,9 +19,22 @@ const Home = () => {
           Welcome To My Blog
         </h1>
         <p className="text-gray-500 text-lg  font-serif flex flex-wrap ">
-          Here you'll find a variety of articles on topics such as web
-          development, software engineering, and programming
-          languages,algorithms and many more.
+          Here, you'll discover a treasure trove of insightful articles covering
+          a wide array of topics. Dive into the fascinating world of web
+          development, where you'll unravel the latest trends, techniques, and
+          tools shaping the digital landscape. Delve deep into the realm of
+          software engineering, exploring the intricacies of crafting robust and
+          scalable solutions to complex problems. Unleash your coding prowess as
+          we explore various programming languages, from the fundamentals to
+          advanced concepts, empowering you to build innovative applications
+          with confidence. But that's not all! My blog is a hub for knowledge
+          seekers, offering insights into algorithms, data structures, and much
+          more. Whether you're a seasoned developer seeking to expand your
+          skills or a curious enthusiast eager to explore the wonders of
+          technology, you'll find something to captivate your mind and fuel your
+          passion. So, join us on this exhilarating journey as we embark on a
+          quest for knowledge, innovation, and inspiration.{" "}
+          <span className="text-white">Welcome aboard!</span>
         </p>
         <Link
           to="/search"
@@ -46,7 +59,7 @@ const Home = () => {
             </div>
             <Link
               to={"/search"}
-              className="text-lg font-semibold text-rose-900 hover:underline text-center"
+              className="text-lg font-semibold text-lime-300 hover:underline text-center"
             >
               View All Posts
             </Link>

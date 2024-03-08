@@ -1,6 +1,7 @@
 import React from "react";
 import blog from "../components/blog.svg";
 import { data } from "autoprefixer";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
     <div>
@@ -23,8 +24,21 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:underline me-4 md:me-6">
-                  Privacy Policy
+                <a
+                  href="https://www.linkedin.com/in/shithin-shetty/"
+                  class="hover:underline me-4 md:me-6 flex "
+                >
+                  <FaLinkedin className="size-5" />
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/shithinshetty"
+                  class="hover:underline me-4 md:me-6 flex "
+                >
+                  <FaGithubSquare className="size-5 " />
+                  Github
                 </a>
               </li>
 

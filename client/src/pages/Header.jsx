@@ -64,14 +64,11 @@ const Header = () => {
         <TextInput
           type="text"
           placeholder="🔍 Search..."
-          className="hidden lg:inline "
+          className=" lg:inline "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />{" "}
       </form>
-      <Button className="w-20 h-10 bg-purple-400 lg:hidden" color="black">
-        <IoSearch />
-      </Button>
       <div className="flex gap-2 md:order-2">
         <Button
           className="w-12 h-10 hidden sm:inline bg-slate-800 rounded-2xl"
