@@ -39,6 +39,7 @@ export default function Search() {
         const data = await res.json();
         setPosts(data.posts);
         setLoading(false);
+        console.log(data.posts);
         if (data.posts.length === 9) {
           setShowMore(true);
         } else {
